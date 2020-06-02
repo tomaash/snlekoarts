@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import styled from '@emotion/styled'
-import { graphql } from 'gatsby'
-import { Layout, Listing, Wrapper, Title } from '../components'
-import website from '../../config/website'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import styled from "@emotion/styled";
+import { graphql } from "gatsby";
+import { Layout, Listing, Wrapper, Title } from "../components";
+import website from "../../config/website";
 
 const Hero = styled.header`
   background-color: ${(props) => props.theme.colors.greyLight};
   display: flex;
   align-items: center;
-`
+`;
 
 const HeroInner = styled(Wrapper)`
   padding-top: 13rem;
@@ -29,7 +29,7 @@ const HeroInner = styled(Wrapper)`
     padding-top: 6rem;
     padding-bottom: 6rem;
   }
-`
+`;
 
 const HeroText = styled.div`
   font-size: 1.7rem;
@@ -41,18 +41,19 @@ const HeroText = styled.div`
   @media (max-width: ${(props) => props.theme.breakpoints.s}) {
     font-size: 1.25rem;
   }
-`
+`;
 
 const Social = styled.ul`
   list-style-type: none;
   display: flex;
   flex-wrap: wrap;
   margin-left: 0;
-  font-family: 'Source Sans Pro', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial',
-    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: "Source Sans Pro", -apple-system, "BlinkMacSystemFont",
+    "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
   li {
     display: inline;
-    &:not([data-name='social-entry-0']) {
+    &:not([data-name="social-entry-0"]) {
       margin-left: 2.5rem;
       @media (max-width: ${(props) => props.theme.breakpoints.s}) {
         margin-left: 1.75rem;
@@ -73,7 +74,7 @@ const Social = styled.ul`
       }
     }
   }
-`
+`;
 
 const ProjectListing = styled.ul`
   list-style-type: none;
@@ -90,48 +91,58 @@ const ProjectListing = styled.ul`
       }
     }
   }
-`
+`;
 
-const IndexWrapper = Wrapper.withComponent('main')
+const IndexWrapper = Wrapper.withComponent("main");
 
 class Index extends Component {
   render() {
     const {
       data: { homepage, social, posts, projects },
-    } = this.props
+    } = this.props;
     return (
       <Layout>
         <Hero>
           <HeroInner>
             <h1>{homepage.data.title.text}</h1>
-            <HeroText dangerouslySetInnerHTML={{ __html: homepage.data.content.html }} />
+            <HeroText
+              dangerouslySetInnerHTML={{ __html: homepage.data.content.html }}
+            />
             <Social>
               {social.nodes.map((s, index) => (
-                <li data-name={`social-entry-${index}`} key={s.primary.label.text}>
+                <li
+                  data-name={`social-entry-${index}`}
+                  key={s.primary.label.text}
+                >
                   <a href={s.primary.link.url}>{s.primary.label.text}</a>
                 </li>
               ))}
             </Social>
           </HeroInner>
         </Hero>
-        <IndexWrapper id={website.skipNavId} style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
-          <Title style={{ marginTop: '4rem' }}>Recent posts</Title>
+        <IndexWrapper
+          id={website.skipNavId}
+          style={{ paddingTop: "2rem", paddingBottom: "2rem" }}
+        >
+          <Title style={{ marginTop: "4rem" }}>Recent posts</Title>
           <Listing posts={posts.nodes} />
-          <Title style={{ marginTop: '8rem' }}>Recent projects</Title>
+          <Title style={{ marginTop: "8rem" }}>Recent projects</Title>
           <ProjectListing>
             {projects.nodes.map((project) => (
               <li key={project.primary.label.text}>
-                <a href={project.primary.link.url}>{project.primary.label.text}</a>
+                <a href={project.primary.link.url}>
+                  {project.primary.label.text}
+                </a>
               </li>
             ))}
           </ProjectListing>
         </IndexWrapper>
       </Layout>
-    )
+    );
   }
 }
 
-export default Index
+export default Index;
 
 Index.propTypes = {
   data: PropTypes.shape({
@@ -155,7 +166,7 @@ Index.propTypes = {
       nodes: PropTypes.array.isRequired,
     }),
   }).isRequired,
-}
+};
 
 export const pageQuery = graphql`
   query IndexQuery {
@@ -214,4 +225,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;
