@@ -124,7 +124,7 @@ class Index extends Component {
           id={website.skipNavId}
           style={{ paddingTop: "2rem", paddingBottom: "2rem" }}
         >
-          <Title style={{ marginTop: "4rem" }}>Recent posts</Title>
+          <Title style={{ marginTop: "4rem" }}>Recent posts foo</Title>
           <Listing posts={posts.nodes} />
           <Title style={{ marginTop: "8rem" }}>Recent projects</Title>
           <ProjectListing>
